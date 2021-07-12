@@ -43,3 +43,8 @@
       path: /etc/exports
       regexp: "^/test/nfs"
       line: "/test/nfs *(rw,sync,no_root_squash)"
+
+  - name: configure /etc/fstab
+    lineinfile:
+      path: /etc/fstab
+      line: "/test/nfs  /mount_nfs      nfs     defaults        0 0"
