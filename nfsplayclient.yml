@@ -1,0 +1,27 @@
+---
+
+- hosts: NFS-client
+  become: true
+  pre_tasks:
+
+
+  - name: install nfs-utils
+    yum:
+      name: nfs-utils
+      state: latest
+
+  - name: stop and disable firewalld
+    service:
+      name: firewalld
+      state: stopped
+      enabled: false
+
+  - name: create mountable directory 
+    file: 
+      path: /mnt/web
+      state: directory
+      owner: root
+      group: root
+      mode: 0775
+  - name: mount volumn
+    shell: mount -t nfs 192.168.1.244:/test/nfs /mnt/web

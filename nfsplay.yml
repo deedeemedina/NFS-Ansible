@@ -1,6 +1,6 @@
 ---
 
-- hosts: all 
+- hosts: NFS-server 
   become: true 
   pre_tasks: 
 
@@ -42,9 +42,7 @@
     lineinfile:
       path: /etc/exports
       regexp: "^/test/nfs"
-      line: "/test/nfs *(rw,sync,no_root_squash)"
+      line: "/test/nfs 192.168.1.244(rw,sync,no_root_squash)"
 
-  - name: configure /etc/fstab
-    lineinfile:
-      path: /etc/fstab
-      line: "/test/nfs  /mount_nfs      nfs     defaults        0 0"
+  - name: exportfs configuration
+    shell: systemctl reload nfs;exportfs -avr
