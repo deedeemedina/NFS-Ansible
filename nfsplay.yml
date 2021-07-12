@@ -32,6 +32,12 @@
       state: directory
       mode: 0775
 
+  - name: stop and disable firewalld
+    service:
+      name: firewalld
+      state: stopped
+      enabled: false
+
   - name: add new server to /etc/exports
     lineinfile:
       path: /etc/exports
