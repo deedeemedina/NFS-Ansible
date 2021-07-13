@@ -1,3 +1,3 @@
 #Ansible-NFS
 
-NFS playbook
+NFS Server & Client playbook
