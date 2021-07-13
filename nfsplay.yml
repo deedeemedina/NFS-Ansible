@@ -1,0 +1,39 @@
+---
+
+- hosts: all 
+  become: true 
+  pre_tasks: 
+
+  - name: updating repository
+    tags: always
+    yum:
+      update_cache: yes
+
+  - name: installing packages
+    tags: always
+    yum:
+      name:
+        - nfs-utils
+        - rpcbind
+
+  - name: enable nfs services
+    service:
+      name: nfs-server
+      state: started
+      enabled: yes 
+
+  - name: disable selinux
+    selinux:
+      state: disabled
+
+  - name: creates directory 
+    file: 
+      path: /test/nfs
+      state: directory
+      mode: 0775
+
+  - name: add new server to /etc/exports
+    lineinfile:
+      path: /etc/exports
+      regexp: "^/test/nfs"
+      line: "/test/nfs *(rw,sync,no_root_squash)"
