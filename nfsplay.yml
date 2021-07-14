@@ -42,7 +42,7 @@
     lineinfile:
       path: /etc/exports
       regexp: "^/test/nfs"
-      line: "/test/nfs 192.168.1.244(rw,sync,no_root_squash)"
+      line: "/test/nfs *(rw,sync,no_root_squash)"
 
   - name: exportfs configuration
     shell: systemctl reload nfs;exportfs -avr
