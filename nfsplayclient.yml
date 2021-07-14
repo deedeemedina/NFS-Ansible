@@ -24,4 +24,4 @@
       group: root
       mode: 0775
   - name: mount volumn
-    shell: mount -t nfs 192.168.1.244:/test/nfs /mnt/web
+    shell: mount -t nfs *:/test/nfs /mnt/web
